@@ -270,15 +270,16 @@ jobs:
           from pathlib import Path
           profile = tomllib.loads(Path('device/os-profiles/ipados-18.7.10-22H374/profile.toml').read_text())
           root = profile['root']
+          # Use the exact volumes produced by the verified diting-userdata run
+          # 43624145134. These are the values in its volume-layout.json, not
+          # placeholders. The kernel, payload and final layout must agree.
           layout = {
-              'ci_placeholder': True,
+              'ci_placeholder': False,
               'build': '22H374',
               'lba_bytes': 4096,
-              'os': {'uuid': root['os_volume_uuid']},
-              'systemos': {'uuid': root['systemos_volume_uuid']},
-              # The Data UUID recorded from the generated userdata layout; the placeholder
-              # bf5d77f3-... is gone, so the kernel, the payload and this file agree.
-              'data': {'uuid': '337CF716-F62B-446B-B959-4A5F12A7701C'},
+              'os': {'uuid': 'B07DF049-7AD9-47B5-9F8F-9EE728056398'},
+              'systemos': {'uuid': '441AAB85-79C5-45A0-8D2E-537F2E8F3A83'},
+              'data': {'uuid': '8A847DD0-0928-420D-ADBC-8AFCD13C0F6C'},
           }
           Path(sys.argv[1]).write_text(json.dumps(layout, indent=2))
           # The UUIDs are compiled into the kernel (kern_exec selects the volumes by them), so
