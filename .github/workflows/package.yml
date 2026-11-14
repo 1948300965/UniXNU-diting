@@ -416,6 +416,14 @@ jobs:
               'firmware_directory': str((root / 'wifi').resolve()),
           }, indent=2))
           PY
+      - name: git credentials for feed fetches
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          # Let the shared package script fetch private/public feeds without an
+          # interactive username prompt. The token is read only by git and is
+          # never printed to the build log.
+          git config --global credential.helper '!f() { echo "username=x-access-token"; echo "password=$GITHUB_TOKEN"; }; f'
       - name: package
         working-directory: device
         env:
