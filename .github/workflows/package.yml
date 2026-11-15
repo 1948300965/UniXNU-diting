@@ -278,8 +278,8 @@ jobs:
               'build': '22H374',
               'lba_bytes': 4096,
               'os': {'uuid': 'B07DF049-7AD9-47B5-9F8F-9EE728056398'},
-              'systemos': {'uuid': '441AAB85-79C5-45A0-8D2E-537F2E8F3A83'},
-              'data': {'uuid': '8A847DD0-0928-420D-ADBC-8AFCD13C0F6C'},
+              'systemos': {'uuid': 'B8A568E7-80EB-4CF9-87DB-AFE6E0FE074D'},
+              'data': {'uuid': 'C7B32CC2-12C4-4150-A256-5B3382818AFC'},
           }
           Path(sys.argv[1]).write_text(json.dumps(layout, indent=2))
           # The UUIDs are compiled into the kernel (kern_exec selects the volumes by them), so
